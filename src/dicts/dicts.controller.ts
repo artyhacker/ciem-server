@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Request } from 'express';
 
 @Controller('dicts')
 export class DictsController {
@@ -8,5 +9,10 @@ export class DictsController {
       { id: 1, name: 'dict1' },
       { id: 2, name: 'dict2' },
     ];
+  }
+
+  @Post()
+  postDicts(@Req() request: Request) {
+    return request.body;
   }
 }
