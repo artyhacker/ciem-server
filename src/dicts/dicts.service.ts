@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Dict } from './dicts.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Dict } from './dict.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DictsService {
-  private readonly dicts: Dict[] = [];
+  constructor(
+    @InjectRepository(Dict)
+    private dictsRepository: Repository<Dict>,
+  ) {}
 
-  getDicts() {
-    return this.dicts;
+  async getDicts(): Promise<Dict[]> {
+    return this.dictsRepository.find();
   }
 
-  addDicts(dicts: Dict[]) {
-    this.dicts.push(...dicts);
+  async addDicts(dicts: Dict[]): Promise<Dict[]> {
+    await this.dictsRepository.insert(dicts);
+    return this.dictsRepository.find();
   }
 }
