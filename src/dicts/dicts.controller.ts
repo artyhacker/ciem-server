@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, Post, Req, Delete, Query } from '@nestjs/common';
 import { Request } from 'express';
 import { DictsService } from './dicts.service';
 import { Dict } from './dict.entity';
@@ -15,5 +15,10 @@ export class DictsController {
   @Post()
   addDicts(@Req() request: Request): Promise<Dict[]> {
     return this.dictsService.addDicts(request.body);
+  }
+
+  @Delete()
+  delDict(@Query('id') id) {
+    return this.dictsService.delDict(id);
   }
 }

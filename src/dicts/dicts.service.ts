@@ -18,4 +18,9 @@ export class DictsService {
     await this.dictsRepository.insert(dicts);
     return this.dictsRepository.find();
   }
+
+  async delDict(id: string) {
+    await this.dictsRepository.delete(id);
+    return '';
+  }
 }
