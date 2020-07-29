@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Req, Delete, Query, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { DictsService } from './dicts.service';
 import { Dict } from './dict.entity';
@@ -17,8 +17,13 @@ export class DictsController {
     return this.dictsService.addDicts(request.body);
   }
 
-  @Delete()
-  delDict(@Query('id') id) {
+  // @Delete()
+  // delDict(@Query('id') id) {
+  //   return this.dictsService.delDict(id);
+  // }
+  
+  @Delete(':id')
+  delDict(@Param('id') id) {
     return this.dictsService.delDict(id);
   }
 }
