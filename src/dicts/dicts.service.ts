@@ -15,7 +15,9 @@ export class DictsService {
   }
 
   async addDicts(dicts: Dict[]): Promise<Dict[]> {
-    await this.dictsRepository.insert(dicts);
+    await this.dictsRepository.insert(dicts).catch(e => {
+      console.log(e);
+    });
     return this.dictsRepository.find();
   }
 
